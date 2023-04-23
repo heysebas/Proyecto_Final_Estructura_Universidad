@@ -18,8 +18,8 @@ public class Estudiante {
     private String career; // carrera
     private double average; // promedio
     
-    Estudiante  left; // izquierdo
-    Estudiante right; // derecho
+//    Estudiante  left; // izquierdo
+//    Estudiante right; // derecho
 
     public Estudiante() {
     }
