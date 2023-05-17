@@ -8,7 +8,7 @@ package modelo;
  *
  * @author sebas
  */
-public class Estudiante {
+public class Student implements Comparable<Student> {
     
     private String name;  //nombre del estudiante
     private String surNames; // apellidos del estudiante
@@ -18,13 +18,13 @@ public class Estudiante {
     private String career; // carrera
     private double average; // promedio
     
-//    Estudiante  left; // izquierdo
-//    Estudiante right; // derecho
+//    Student  left; // izquierdo
+//    Student right; // derecho
 
-    public Estudiante() {
+    public Student() {
     }
 
-    public Estudiante(String name, String surNames, String code, String document, String semester, String career, double average) {
+    public Student(String name, String surNames, String code, String document, String semester, String career, double average) {
         this.name = name;
         this.surNames = surNames;
         this.code = code;
@@ -101,6 +101,11 @@ public class Estudiante {
                 ", carrera='" + career + '\'' +
                 ", promedio=" + average +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Student o) {
+        return this.code.compareTo(o.getCode());
     }
     
     

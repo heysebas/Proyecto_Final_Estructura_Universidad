@@ -6,7 +6,7 @@ package vista;
 
 import controlador.ControladorRegistrar;
 import javax.swing.JOptionPane;
-import modelo.Estudiante;
+import modelo.Student;
 
 /**
  *
@@ -260,11 +260,14 @@ public class VistaAgregarEstudiante extends javax.swing.JFrame {
             String career = txtCareer.getText();
             double average = Double.parseDouble(txtAverage.getText());
 
-            Estudiante student = new Estudiante(name, surName, code, document, semester, career, average);
+            Student student = new Student(name, surName, code, document, semester, career, average);
 
             boolean repuesta = controlador.addStudent(student);
 
             if (repuesta) {
+                controlador.addStudedentArbol(student);
+                controlador.imprimirInprde();
+
                 JOptionPane.showMessageDialog(null, "Se agrego el estudiante");
                 limpiarCampos();
             } else {
@@ -279,7 +282,7 @@ public class VistaAgregarEstudiante extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Debe llenar el campo del buscar codigo");
         } else {
             String code = txtSearchCode.getText();
-            Estudiante student = controlador.searchStudents(code);
+            Student student = controlador.searchStudents(code);
             if (student != null) {
                 txtName.setText(student.getName());
                 txtSurNames.setText(student.getSemester());
@@ -314,7 +317,7 @@ public class VistaAgregarEstudiante extends javax.swing.JFrame {
             String career = txtCareer.getText();
             double average = Double.parseDouble(txtAverage.getText());
 
-            Estudiante student = new Estudiante(name, surName, code, document, semester, career, average);
+            Student student = new Student(name, surName, code, document, semester, career, average);
             boolean repuesta = controlador.editStudent(student);
 
             if (repuesta) {

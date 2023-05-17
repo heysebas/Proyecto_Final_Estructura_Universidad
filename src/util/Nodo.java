@@ -8,77 +8,119 @@ package util;
  *
  * @author sebas
  */
-public class Nodo<T> {
+public class Nodo<T extends Comparable<T>> {
+
+    private Nodo<T> siguiente, anterior;
+    private Nodo<T> izquierdo, derecho, padre;
+    private T dato;
+
+    public Nodo(Nodo<T> izquierdo, Nodo<T> derecho, Nodo<T> padre, T dato) {
+        this.izquierdo = izquierdo;
+        this.derecho = derecho;
+        this.padre = padre;
+        this.dato = dato;
+    }
+
     
-	private T dato;
-	private Nodo<T> siguiente;
-	private Nodo<T> anterior;
-	
-	/**
-	 * Constructor de la clase Nodo
-	 * @param dato Elemento que se guarda en el Nodo
-	 * @param siguiente Enlace al siguiente Nodo
-	 */
-	public Nodo(T dato, Nodo<T> siguiente, Nodo<T> anterior) {
-		super();
-		this.dato = dato;
-		this.siguiente = siguiente;
-		this.anterior=anterior;
-	}
-	
-	/**
-	 * Constructor de la clase Nodo
-	 * @param dato Elemento que se guarda en el Nodo
-	 */
-	public Nodo(T dato) {
-		super();
-		this.dato = dato;
-	}
-	
-	/**
-	 * Constructor de la clase Nodo
-	 */
-	public Nodo() { }
 
-	/**
-	 * @return the dato
-	 */
-	public T getDato() {
-		return dato;
-	}
+    public Nodo(Nodo<T> siguiente, Nodo<T> anterior, T dato) {
+        this.siguiente = siguiente;
+        this.anterior = anterior;
+        this.dato = dato;
+    }
 
-	/**
-	 * @param dato the dato to set
-	 */
-	public void setDato(T dato) {
-		this.dato = dato;
-	}
+    public Nodo(T dato) {
+        this.dato = dato;
+    }
 
-	/**
-	 * @return the siguiente
-	 */
-	public Nodo<T> getSiguiente() {
-		return siguiente;
-	}
+    public Nodo(Nodo<T> padre, T dato) {
+        this.padre = padre;
+        this.dato = dato;
+    }
 
-	/**
-	 * @param siguiente the siguiente to set
-	 */
-	public void setSiguiente(Nodo<T> siguiente) {
-		this.siguiente = siguiente;
-	}
-	
-	public Nodo<T> getAnterior() {
-		return anterior;
-	}
+    public Nodo<T> getIzquierdo() {
+        return izquierdo;
+    }
 
-	public void setAnterior(Nodo<T> anterior) {
-		this.anterior = anterior;
-	}
+    public void setIzquierdo(Nodo<T> izquierdo) {
+        this.izquierdo = izquierdo;
+    }
 
-	@Override
-	public String toString() {
-		return dato.toString();
-	}
-	
+    public Nodo<T> getDerecho() {
+        return derecho;
+    }
+
+    public void setDerecho(Nodo<T> derecho) {
+        this.derecho = derecho;
+    }
+
+    public Nodo<T> getPadre() {
+        return padre;
+    }
+
+    public void setPadre(Nodo<T> padre) {
+        this.padre = padre;
+    }
+
+    public T getDato() {
+        return dato;
+    }
+
+    public void setDato(T dato) {
+        this.dato = dato;
+    }
+
+    public Nodo<T> getSiguiente() {
+        return siguiente;
+    }
+
+    public void setSiguiente(Nodo<T> siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public Nodo<T> getAnterior() {
+        return anterior;
+    }
+
+    public void setAnterior(Nodo<T> anterior) {
+        this.anterior = anterior;
+    }
+
+    public boolean agregar(T nuevo) {
+        if (nuevo.compareTo(dato) < 0) {
+            if (izquierdo == null) {
+                izquierdo = new Nodo<>(this, nuevo);
+                return true;
+            } else {
+                return izquierdo.agregar(nuevo);
+            }
+        } else if (nuevo.compareTo(dato) > 0) {
+            if (derecho == null) {
+                derecho = new Nodo<>(this, nuevo);
+                return true;
+            } else {
+                return derecho.agregar(nuevo);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determina si un Nodo es una Hoja
+     *
+     * @return true si es Hoja
+     */
+    public boolean esHoja() {
+        return izquierdo == null && derecho == null;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean tieneUnHijo() {
+        return (izquierdo != null && derecho == null) || (derecho != null && izquierdo == null);
+    }
+
 }

@@ -4,8 +4,10 @@
  */
 package controlador;
 
-import modelo.Estudiante;
-import modelo.Universidad;
+import javax.swing.JPanel;
+import modelo.Student;
+import modelo.University;
+import util.SimuladorArbolBinario;
 
 /**
  *
@@ -13,32 +15,64 @@ import modelo.Universidad;
  */
 public class ControladorRegistrar {
 
-    Universidad universidad;
+    University university;
+    SimuladorArbolBinario simulador;
 
     public ControladorRegistrar() {
-        universidad = new Universidad();
+        university = new University();
+        simulador = new SimuladorArbolBinario();
     }
 
-    //------------------------------------------------------Buscar Estudiante---------------------------------------------------------------------//
-    public Estudiante searchStudents(String code) {
-        return universidad.searchStudents(code);
-    }
-
-    //---------------------------------------------------------------------------------------------------------------------------------------------//
-    //------------------------------------------------------agregar Estudiante---------------------------------------------------------------------//
-    public boolean addStudent(Estudiante student) {
-        return universidad.addStudent(student);
+    //------------------------------------------------------Buscar Student---------------------------------------------------------------------//
+    public Student searchStudents(String code) {
+        return university.searchStudents(code);
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------//
-    //------------------------------------------------------Editar Estudiante----------------------------------------------------------------------//
-    public boolean editStudent(Estudiante student) {
-        return universidad.editStudent(student);
+    //------------------------------------------------------agregar Student---------------------------------------------------------------------//
+    public boolean addStudent(Student student) {
+        return university.addStudent(student);
+    }
+
+    public void addStudedentArbol(Student student) {
+//        university.addStudedentArbol(student);
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------//
-    //------------------------------------------------------Eliminar Estudiante--------------------------------------------------------------------//
-       public boolean deleteStudent(String cedula) {
-        return universidad.deleteStudent(cedula);
+    //------------------------------------------------------Editar Student----------------------------------------------------------------------//
+    public boolean editStudent(Student student) {
+        return university.editStudent(student);
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------//
+    //------------------------------------------------------Eliminar Student--------------------------------------------------------------------//
+    public boolean deleteStudent(String document) {
+        return university.deleteStudent(document);
+    }
+
+    public void imprimirInprde() {
+//         university.imprimirInprde();
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------//
+    //------------------------------------------------------simulador-----------------------------------------------------------------------------//
+    public boolean insertar(Student student) {
+        return simulador.insertar(student);
+    }
+
+    public String inOrden() {
+        return simulador.inOrden();
+    }
+
+    public String preOrden() {
+        return simulador.preOrden();
+    }
+
+    public String postOrden() {
+        return simulador.postOrden();
+    }
+
+    public JPanel getDibujo() {
+        return simulador.getDibujo();
     }
 }
