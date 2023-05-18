@@ -137,4 +137,141 @@ public class ArbolBinario<T extends Comparable<T>> {
     public JPanel getdibujo() {
         return new ArbolExpresionGrafico(this);
     }
+
+    /**
+     * Elimina un elemento del �rbol
+     *
+     * @param elemento Elemento a borrar
+     */
+    public boolean eliminar(T elemento) {
+        if (estaVacio()) {
+            return false;
+        } else {
+            eliminar(raiz, elemento);
+            return true;
+        }
+
+    }
+
+    /**
+     * Elimina un elemento del �rbol
+     *
+     * @param n Nodo ra�z
+     * @param elemento Elemento a buscar para borrar
+     */
+    private void eliminar(Nodo<T> n, T elemento) {
+
+        if (n != null) {
+            if (elemento.compareTo(n.getDato()) == 0) {
+                eliminar(n);
+            } else if (elemento.compareTo(n.getDato()) < 0) {
+                eliminar(n.getIzquierdo(), elemento);
+            } else if (elemento.compareTo(n.getDato()) > 0) {
+                eliminar(n.getDerecho(), elemento);
+            }
+        }
+
+    }
+
+    /**
+     * Elimina un Nodo del �rbol
+     *
+     * @param n Nodo a eliminar
+     */
+    private void eliminar(Nodo<T> n) {
+
+        Nodo<T> padre = n.getPadre();
+
+        //Caso 1
+        if (n.esHoja()) {
+            if (padre == null) {
+                raiz = null;
+            } else if (n.getDato().compareTo(padre.getDato()) > 0) {
+                padre.setDerecho(null);
+            } else {
+                padre.setIzquierdo(null);
+            }
+            peso--;
+            //Caso 2
+        } else if (n.tieneUnHijo()) {
+            if (padre == null) {
+                if (n.getIzquierdo() != null) {
+                    raiz = n.getIzquierdo();
+                } else {
+                    raiz = n.getDerecho();
+                }
+                raiz.setPadre(null);
+            } else if (n.getDato().compareTo(padre.getDato()) > 0) {
+                if (n.getIzquierdo() != null) {
+                    padre.setDerecho(n.getIzquierdo());
+                } else {
+                    padre.setDerecho(n.getDerecho());
+                }
+                padre.getDerecho().setPadre(padre);
+            } else {
+                if (n.getIzquierdo() != null) {
+                    padre.setIzquierdo(n.getIzquierdo());
+                } else {
+                    padre.setIzquierdo(n.getDerecho());
+                }
+                padre.getIzquierdo().setPadre(padre);
+            }
+            peso--;
+            //Caso 3
+        } else {
+            Nodo<T> mayor = obtenerNodoMayor(n.getIzquierdo());
+            T aux = mayor.getDato();
+            eliminar(mayor);
+            n.setDato(aux);
+        }
+
+    }
+
+    /**
+     * Obtiene el nodo m�s grande de un sub�rbol
+     *
+     * @param n Nodo Izquierdo del subarbol
+     * @return Nodo m�s grande
+     */
+    public Nodo<T> obtenerNodoMayor(Nodo<T> n) {
+        while (n.getDerecho() != null) {
+            n = n.getDerecho();
+        }
+        return n;
+    }
+
+    
+//////       public void editarDato(T dato) {
+//////        raiz = editarNodo(raiz, dato);
+//////    }
+//////
+//////    private Nodo editarNodo(Nodo nodo, T dato) {
+//////        if (nodo == null) {
+//////            return null;
+//////        } else if (dato == nodo.getDato()) {
+//////            nodo.getDato = nuevoDato;
+//////        } else if (datoAnterior < nodo.dato) {
+//////            nodo.izquierdo = editarNodo(nodo.izquierdo, datoAnterior, nuevoDato);
+//////        } else {
+//////            nodo.derecho = editarNodo(nodo.derecho, datoAnterior, nuevoDato);
+//////        }
+//////        return nodo;
+//////    }
+    
+////////    public void editarDato(int datoAnterior, int nuevoDato) {
+////////        raiz = editarNodo(raiz, datoAnterior, nuevoDato);
+////////    }
+////////
+////////    private Nodo editarNodo(Nodo nodo, int datoAnterior, int nuevoDato) {
+////////        if (nodo == null) {
+////////            return null;
+////////        } else if (datoAnterior == nodo.dato) {
+////////            nodo.dato = nuevoDato;
+////////        } else if (datoAnterior < nodo.dato) {
+////////            nodo.izquierdo = editarNodo(nodo.izquierdo, datoAnterior, nuevoDato);
+////////        } else {
+////////            nodo.derecho = editarNodo(nodo.derecho, datoAnterior, nuevoDato);
+////////        }
+////////        return nodo;
+////////    }
 }
