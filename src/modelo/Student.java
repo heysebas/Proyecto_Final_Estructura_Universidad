@@ -9,7 +9,7 @@ package modelo;
  * @author sebas
  */
 public class Student implements Comparable<Student> {
-    
+
     private String name;  //nombre del estudiante
     private String surNames; // apellidos del estudiante
     private String code; // codigo del estudiante
@@ -17,10 +17,9 @@ public class Student implements Comparable<Student> {
     private String semester; // semestre
     private String career; // carrera
     private double average; // promedio
-    
+
 //    Student  left; // izquierdo
 //    Student right; // derecho
-
     public Student() {
     }
 
@@ -90,23 +89,26 @@ public class Student implements Comparable<Student> {
         this.average = average;
     }
 
-     @Override
+    @Override
     public String toString() {
-        return "Estudiante{" +
-                "nombres='" + name + '\'' +
-                ", apellidos='" + surNames + '\'' +
-                ", codigo=" + code +
-                ", cedula='" + document + '\'' +
-                ", semestre=" + semester +
-                ", carrera='" + career + '\'' +
-                ", promedio=" + average +
-                '}';
+        return code;
     }
 
+//     @Override
+//    public String toString() {
+//        return "Estudiante{" +
+//                "nombres='" + name + '\'' +
+//                ", apellidos='" + surNames + '\'' +
+//                ", codigo=" + code +
+//                ", cedula='" + document + '\'' +
+//                ", semestre=" + semester +
+//                ", carrera='" + career + '\'' +
+//                ", promedio=" + average +
+//                '}';
+//    }
     @Override
     public int compareTo(Student o) {
         return this.code.compareTo(o.getCode());
     }
-    
-    
+
 }

@@ -22,6 +22,16 @@ public class University {
         this.listStudents = new ArrayList<>();
         this.arbol = new ArbolBinario<>();
     }
+    
+    
+     public int listStudents() {
+        return listStudents.size();
+    }
+     
+      public Student student(int numero) {
+        return listStudents.get(numero);
+    }
+     
 
     /**
      *
@@ -101,7 +111,7 @@ public class University {
     public boolean deleteStudent(String code) {
         for (int i = 0; i < listStudents.size(); i++) {
             if (listStudents != null && listStudents.get(i).getCode().equals(code)) {
-                listStudents.get(i);
+                listStudents.remove(i);
                 return true;
             }
         }

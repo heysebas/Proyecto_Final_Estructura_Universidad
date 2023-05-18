@@ -19,6 +19,10 @@ public class SimuladorArbolBinario<T extends Comparable<T>> {
     public boolean insertar(T dato) {
         return (this.miArbol.agregar(dato));
     }
+    
+    public boolean eliminar(T dato) {
+        return (this.miArbol.eliminar(dato));
+    }
 
     //metodo para mostrar los recorridos del arbol
     public String preOrden() {
